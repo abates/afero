@@ -692,6 +692,23 @@ func TestMemFsLstatIfPossible(t *testing.T) {
 	}
 }
 
+func TestMemFsRemovePathError(t *testing.T) {
+	t.Parallel()
+
+	fs := NewMemMapFs()
+
+	if err := fs.Mkdir("foo", 0777); err != nil {
+		t.Fatal(err)
+	}
+
+	if err := WriteFile(fs, "foo/file.txt", []byte("abc"), 0777); err != nil {
+		t.Fatal(err)
+	}
+
+	err := fs.Remove("foo")
+	checkPathError(t, err, "remove")
+}
+
 func TestMemMapFsConfurrentMkdir(t *testing.T) {
 	const dir = "test_dir"
 	const n = 1000
