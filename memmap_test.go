@@ -918,3 +918,13 @@ func TestMemMapFsRename(t *testing.T) {
 		}
 	}
 }
+
+func TestStatEmptyPath(t *testing.T) {
+	t.Parallel()
+
+	fs := NewMemMapFs()
+
+	if _, err := fs.Stat(""); !os.IsNotExist(err) {
+		t.Fatal(err)
+	}
+}
