@@ -44,7 +44,7 @@ func (f *BasePathFile) ReadDir(n int) ([]fs.DirEntry, error) {
 	return readDirFile{f.File}.ReadDir(n)
 }
 
-func NewBasePathFs(source Fs, path string) Fs {
+func NewBasePathFs(source Fs, path string) *BasePathFs {
 	return &BasePathFs{source: source, path: path}
 }
 

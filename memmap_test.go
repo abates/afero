@@ -675,19 +675,13 @@ func TestMemFsLstatIfPossible(t *testing.T) {
 
 	fs := NewMemMapFs()
 
-	// We assert that fs implements Lstater
-	fsAsserted, ok := fs.(Lstater)
-	if !ok {
-		t.Fatalf("The filesytem does not implement Lstater")
-	}
-
 	file, err := fs.OpenFile("/a.txt", os.O_CREATE, 0o644)
 	if err != nil {
 		t.Fatalf("Error when opening file: %v", err)
 	}
 	defer file.Close()
 
-	_, lstatCalled, err := fsAsserted.LstatIfPossible("/a.txt")
+	_, lstatCalled, err := fs.LstatIfPossible("/a.txt")
 	if err != nil {
 		t.Fatalf("Function returned err: %v", err)
 	}
@@ -699,7 +693,7 @@ func TestMemFsLstatIfPossible(t *testing.T) {
 func TestMemMapFsConfurrentMkdir(t *testing.T) {
 	const dir = "test_dir"
 	const n = 1000
-	mfs := NewMemMapFs().(*MemMapFs)
+	mfs := NewMemMapFs()
 
 	allFilePaths := make([]string, 0, n)
 

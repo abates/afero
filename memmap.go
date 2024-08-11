@@ -29,6 +29,8 @@ import (
 	"github.com/spf13/afero/mem"
 )
 
+var _ Fs = (*MemMapFs)(nil)
+
 const chmodBits = os.ModePerm | os.ModeSetuid | os.ModeSetgid | os.ModeSticky // Only a subset of bits are allowed to be changed. Documented under os.Chmod()
 
 type MemMapFs struct {
@@ -37,7 +39,7 @@ type MemMapFs struct {
 	init sync.Once
 }
 
-func NewMemMapFs() Fs {
+func NewMemMapFs() *MemMapFs {
 	return &MemMapFs{}
 }
 
