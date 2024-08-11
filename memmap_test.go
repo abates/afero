@@ -928,7 +928,7 @@ func TestMemFsList(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	files := fs.(*MemMapFs).List()
+	files := fs.List()
 	if len(files) != 4 {
 		t.Fatalf("Expected 4 files, got %d", len(files))
 	}
