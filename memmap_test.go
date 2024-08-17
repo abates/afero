@@ -951,7 +951,7 @@ func TestMemFsList(t *testing.T) {
 	}
 
 	filenames := make([]string, 0, 4)
-	for file, _ := range files {
+	for file := range files {
 		filenames = append(filenames, file)
 	}
 

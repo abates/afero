@@ -1,7 +1,9 @@
 package afero
 
 import (
+	"os"
 	"testing"
+	"time"
 )
 
 func TestMkdirAllReadonly(t *testing.T) {
@@ -22,13 +24,6 @@ func TestMkdirAllReadonly(t *testing.T) {
 		t.Error("Creating new dir with MkdirAll on ReadOnlyFs where a file already exists should fail but returned nil")
 	}
 }
-package afero
-
-import (
-	"os"
-	"testing"
-	"time"
-)
 
 func checkForErrPermission(t *testing.T, err error) {
 	t.Helper()
